@@ -1,3 +1,6 @@
+import time
+import psycopg2
+from psycopg2.extras import RealDictCursor
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -16,3 +19,19 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# while True:
+#     try:
+#         conn = psycopg2.connect(
+#             host='localhost',
+#             database = 'fastapi',
+#             user = 'postgres',
+#             password = '0p3n1t',
+#             cursor_factory = RealDictCursor
+#         )
+#         cursor = conn.cursor()
+#         print("Connected to the database successfully")
+#         break
+#     except Exception as error:
+#         print("Could not connect to the database", error)
+#         time.sleep(2)
