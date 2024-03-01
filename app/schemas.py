@@ -1,6 +1,6 @@
 from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel, EmailStr
+from typing import Annotated, Optional
+from pydantic import BaseModel, EmailStr, Field
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -36,4 +36,8 @@ class Post(PostBase):
     owner: UserOut
     class Config:
         orm_mode = True
+    
+class Vote(BaseModel):
+    post_id: int
+    direction: Annotated[int, Field(strict=True, le=1, ge=-1)]
 
